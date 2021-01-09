@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Permission;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseAdminController;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
 
-class PermissionController extends Controller
+class PermissionController extends BaseAdminController
 {
   public function index()
   {

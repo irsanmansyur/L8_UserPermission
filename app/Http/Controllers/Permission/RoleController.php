@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Permission;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseAdminController;
 use Spatie\Permission\Models\Role;
 
 
-class RoleController extends Controller
+class RoleController extends BaseAdminController
 {
   public function index()
   {

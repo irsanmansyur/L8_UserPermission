@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
+use CyrildeWit\EloquentViewable\InteractsWithViews;
+use CyrildeWit\EloquentViewable\Contracts\Viewable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements Viewable
 {
-  use HasFactory, Notifiable, HasRoles;
+  use HasFactory, Notifiable, HasRoles, InteractsWithViews;
 
   /**
    * The attributes that are mass assignable.

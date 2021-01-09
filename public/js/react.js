@@ -34802,7 +34802,7 @@ __webpack_require__(/*! ./components/Upload/ImgProfile */ "./resources/js/compon
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\WEB\Laravel\klinik\resources\js\react.js */"./resources/js/react.js");
+module.exports = __webpack_require__(/*! D:\WEB\Laravel\L8_UserPermission\resources\js\react.js */"./resources/js/react.js");
 
 
 /***/ })

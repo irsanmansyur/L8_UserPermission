@@ -1,11 +1,25 @@
 <?php
 
+use App\Http\Controllers\Dashboard\SuperAdminDashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Permission\{MenuController, NavigationController, PermissionController, RoleController, RolePermissionController, RoleUserController};
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\SecurityController;
 use App\Models\Navigation;
 
+
+Route::middleware("auth")->group(function () {
+  Route::prefix("admin")->group(function () {
+    Route::get("dashboard", [SuperAdminDashboardController::class, "index"])->name("dashboard");
+    Route::prefix("user")->namespace("User")->group(function () {
+      Route::get("profile", [ProfileController::class, "index"])->name("user.profile");
+      Route::put("profile", [ProfileController::class, "update"]);
+      Route::post("{user}/upload-img", [ProfileController::class, "uploadThumbnail"])->name("user.uploadthumbnail");
+      Route::get("security", [SecurityController::class, "index"])->name("user.security");
+      Route::post("security", [SecurityController::class, "update"]);
+    });
+  });
+});
 Route::prefix("super-admin")->middleware(['role:super admin', "auth"])->group(function () {
   Route::namespace("permission")->group(function () {
     Route::prefix("permission")->group(function () {
@@ -56,14 +70,5 @@ Route::prefix("super-admin")->middleware(['role:super admin', "auth"])->group(fu
       Route::put('/{menu}/edit', [MenuController::class, 'update']);
       Route::delete('/{menu}/delete', [MenuController::class, 'destroy'])->name("menu.delete");
     });
-  });
-});
-Route::prefix("admin")->middleware("auth")->group(function () {
-  Route::prefix("user")->namespace("User")->group(function () {
-    Route::get("profile", [ProfileController::class, "index"])->name("user.profile");
-    Route::put("profile", [ProfileController::class, "update"]);
-    Route::post("{user}/upload-img", [ProfileController::class, "uploadThumbnail"])->name("user.uploadthumbnail");
-    Route::get("security", [SecurityController::class, "index"])->name("user.security");
-    Route::post("security", [SecurityController::class, "update"]);
   });
 });
